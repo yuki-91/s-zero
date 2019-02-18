@@ -27,6 +27,8 @@
 #include "jump_board.h"
 #include "jump_effect.h"
 #include "jump_board_reverse.h"
+#include "drifting_effect_mini.h"
+
 //グローバル変数
 // 頂点属性(1つ目：座標、2つ目：カラー,3つ目：テクスチャー)
 #define FVF_VERTEX_PLAYER (D3DFVF_XYZ|D3DFVF_DIFFUSE | D3DFVF_TEX1 )
@@ -91,8 +93,11 @@ bool pos_y = false;
 
 float roll = 0.0f;
 float jump_roll = 0.0f;
-int turbo_count = 0;
-int turbo_speed_count = 0;
+int turbo_count_left = 0;
+int turbo_speed_count_left = 0;
+int turbo_count_right = 0;
+int turbo_speed_count_right = 0;
+
 float jump_dash = 0.0f;
 bool engin_sound = false;
 int pw_dash_time = 0;
@@ -124,7 +129,7 @@ bool CX_model::InitXmodel(void)
 	pDevice = CRender::GetD3DDevice();	//デバイスの取得
 	coin0 = false;
 	vx = 0.0f;
-	g_pos = D3DXVECTOR3(0.0f, 1.4f, 0.0f);
+	g_pos = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	g_Dir = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	g_rot = D3DXVECTOR3(0, 0, 0);     //  回転
 	g_Rot = 180.0f;
@@ -152,6 +157,8 @@ bool CX_model::InitXmodel(void)
 	jump_dash = 0.0f;
 	pw_dash_time = 0;
 	pw_dash_derete = false;
+	jump_roll = 0.0f;
+
 	if (pDevice == NULL)
 	{
 		return false;
@@ -360,11 +367,15 @@ void CX_model::Update()
 			g_rot.y -= 0.035f;                                    //  Y軸方向に０．２ｆ分減算回転    
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, -0.3f);    //  回転マトリクスの作成
 
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_left++;
+			if (turbo_count_left > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 
@@ -391,11 +402,15 @@ void CX_model::Update()
 			D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
 			g_rot.y += 0.035f;                                    //  Y軸方向に０．２ｆ分加算回転 
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, 0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_right++;
+			if (turbo_count_right > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 			//右下上ドリフト
@@ -407,14 +422,21 @@ void CX_model::Update()
 			if (force_right >= 0.25) {
 				force_right = 0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			}
 			g_rot.y += 0.035f;                                    //  Y軸方向に０．２ｆ分加算回転 
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, 0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_right++;
+			if (turbo_count_right > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 			//左下上ドリフト
@@ -426,14 +448,21 @@ void CX_model::Update()
 			if (force_left <= -0.25) {
 				force_left = -0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			}
 			g_rot.y -= 0.035f;                                   //  Y軸方向に０．２ｆ分減算回転    
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, -0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_left++;
+			if (turbo_count_left > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 			//右上ドリフト
@@ -445,14 +474,21 @@ void CX_model::Update()
 			if (force_right >= 0.25) {
 				force_right = 0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			}
 			g_rot.y += 0.035f;                                    //  Y軸方向に０．２ｆ分加算回転 
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, 0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_right++;
+			if (turbo_count_right > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			CSmokeEffect::Createsmoke_explosion(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			break;
@@ -463,17 +499,24 @@ void CX_model::Update()
 			if (force_right >= 0.25) {
 				force_right = 0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_right, 0, vx);  //  移動マトリクスの作成 
+			}
 			if (vx < 0) {
 				vx += Brake_Z;
 			}
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, 0.3f);    //  回転マトリクスの作成
 			g_rot.y += 0.035f;
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_right++;
+			if (turbo_count_right > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 
@@ -486,14 +529,21 @@ void CX_model::Update()
 			if (force_left <= -0.25) {
 				force_left = -0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			}
 			g_rot.y -= 0.035f;                                    //  Y軸方向に０．２ｆ分減算回転      
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, -0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_left++;
+			if (turbo_count_left > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			CSmokeEffect::Createsmoke_explosion(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			break;
@@ -504,17 +554,24 @@ void CX_model::Update()
 			if (force_left <= -0.25) {
 				force_left = -0.25;
 			}
-			D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			if (g_pos.y <= 6.9)
+			{
+				D3DXMatrixTranslation(&s_matrix, force_left, 0, vx);  //  移動マトリクスの作成  
+			}
 			if (vx < 0) {
 				vx += Brake_Z;
 			}
 			g_rot.y -= 0.035f;                                    //  Y軸方向に０．２ｆ分減算回転      
 			D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, 0, -0.3f);    //  回転マトリクスの作成
-			turbo_count++;
-			if (turbo_count > TURBO_COUNT)
+			turbo_count_left++;
+			if (turbo_count_left > TURBO_COUNT)
 			{
 				PlaySound(SOUND_LABEL_TURBO);
 				CDriftingEffect::CreateDrifting_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
+			else
+			{
+				CDrifting_MEffect::CreateDrifting_M_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 			}
 			break;
 
@@ -751,27 +808,44 @@ void CX_model::Update()
 			{
 				roll -= 0.002;
 			}
-
-
-		if (turbo_count > TURBO_COUNT)
+	
+		//左
+		if (turbo_count_left > TURBO_COUNT)
 		{
 			vx -= 0.2f;
-			turbo_speed_count++;
-			if (turbo_speed_count > 40 || CBillboard::HitPlayer() == true || g_pos.y > 6.0f)
+			turbo_speed_count_left++;
+			if (turbo_speed_count_left > 40 || CBillboard::HitPlayer() == true || g_pos.y > 6.0f)
 			{
-				turbo_speed_count = 0;
-				turbo_count = 0;
+				turbo_speed_count_left = 0;
+				turbo_count_left = 0;
 			}
 		}
 		else
 		{
-			turbo_speed_count = 0;
-			turbo_count = 0;
+			turbo_speed_count_left = 0;
+			turbo_count_left = 0;
+		}
+
+		//右
+		if (turbo_count_right > TURBO_COUNT)
+		{
+			vx -= 0.2f;
+			turbo_speed_count_right++;
+			if (turbo_speed_count_right > 40 || CBillboard::HitPlayer() == true || g_pos.y > 6.0f)
+			{
+				turbo_speed_count_right = 0;
+				turbo_count_right = 0;
+			}
+		}
+		else
+		{
+			turbo_speed_count_right = 0;
+			turbo_count_right = 0;
 		}
 	}
 
 	//アイテムキノコ使用
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false)
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
 	{
 		CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
 		kino = true;
@@ -798,9 +872,14 @@ void CX_model::Update()
 	star_speed = 0.0f;
 
 	//アイテムスター使用
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false)
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
 	{
 		star = true;
+	}
+
+	if (star_time >= 1)
+	{
+		CStarEffect::CreateStar_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 	}
 
 	if (star_time >= 420)
@@ -813,7 +892,6 @@ void CX_model::Update()
 
 	if (star == true)
 	{
-		CStarEffect::CreateStar_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
 		if (g_pos.y < 6.0f)
 		{
 			star_speed = 0.1f;
@@ -827,7 +905,7 @@ void CX_model::Update()
 	kino_count = false;
 
 	//トリプルキノコ使用
-	bool isUsedTripleKinoko = (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false);
+	bool isUsedTripleKinoko = (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button());
 	if (isUsedTripleKinoko)
 	{
 		CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
@@ -869,7 +947,7 @@ void CX_model::Update()
 	}
 	else if (pw_dash_time > 1)
 	{
-		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && b_kinoko_hit == false && pos_y == false)
+		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
 		{
 			PlaySound(SOUND_LABEL_WAHAAKINO);
 			CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
@@ -916,8 +994,13 @@ void CX_model::Update()
 
 	if (bJump)
 	{
-		if (jump_roll < 6) {
+		if (jump_roll < 6) 
+		{
 			jump_roll += 0.2;
+			if (jump_roll == 1.2f)
+			{
+				CJumpEffect::CreateJump_Effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y, CX_model::XmodelPos().z);
+			}
 			
 		}
 		D3DXMatrixRotationYawPitchRoll(&z_matrix, 0, jump_roll, 0);    //  回転マトリクスの作成
@@ -927,10 +1010,7 @@ void CX_model::Update()
 			g_pos.y += VALUE_GRAVITY * 2;
 
 		}
-		if (jump_roll == 1)
-		{
-			CJumpEffect::CreateJump_Effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y , CX_model::XmodelPos().z);
-		}
+		
 		
 	}
 
@@ -947,6 +1027,7 @@ void CX_model::Update()
 		fJump = 0.0f;
 		g_pos.y = 1.0f;
 		bJumpAll = false;
+		jump_roll = 0.0f;
 	}
 
 
@@ -967,11 +1048,19 @@ void CX_model::Update()
 
 	if (!kino && !star && !kino3)
 	{
+		//左
 		if (vx < -MAX_GARD && g_pos.y > 1)
 		{
 			vx = -MAX_GARD;
-			turbo_speed_count = 0;
-			turbo_count = 0;
+			turbo_speed_count_left = 0;
+			turbo_count_left = 0;
+		}
+		//右
+		if (vx < -MAX_GARD && g_pos.y > 1)
+		{
+			vx = -MAX_GARD;
+			turbo_speed_count_right = 0;
+			turbo_count_right = 0;
 		}
 	}
 
@@ -1021,22 +1110,22 @@ void CX_model::Update()
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardTrigger(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardPress(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardTrigger(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardPress(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardTrigger(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardTrigger(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardTrigger(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardTrigger(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
@@ -1161,6 +1250,7 @@ void CX_model::Update()
 	if (CModeGame::GetUse() == false)
 	{
 		coin0 = false;
+		bJump = false;
 		g_pos = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 		g_Dir = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 		g_rot = D3DXVECTOR3(0, 0, 0);     //  回転
@@ -1170,6 +1260,7 @@ void CX_model::Update()
 		b_boost2 = false;
 		max_speed = 0.5f;
 		g_modelbUse = false;
+
 	}
 	else {
 		g_modelbUse = true;
@@ -1213,11 +1304,11 @@ D3DXVECTOR3 CX_model::XmodelPos()
 
 
 //キャラの向き
-float CX_model::XmodelRot()
+D3DXVECTOR3 CX_model::XmodelRot()
 {
-	float g_R = g_Rot +270.0f;
+	//D3DXVECTOR3 g_R = g_rot +90.0f;
 
-	return g_R;
+	return g_rot;
 }
 
 bool CX_model::pw_dash_dele()

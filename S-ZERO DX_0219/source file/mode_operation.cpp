@@ -28,6 +28,7 @@ void CModeOperation::Init()
 
 void CModeOperation::Uninit()
 {
+
 }
 
 void CModeOperation::Update()

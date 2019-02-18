@@ -69,7 +69,7 @@ void CRoadCurveD::Init(void)
 
 	mp_Position[11] = D3DXVECTOR3(-35.3f, 1.21f, 90.0f); //âEè„
 
-	mp_Position[12] = D3DXVECTOR3(25.0f, 1.21f, -130.0f);
+	mp_Position[12] = D3DXVECTOR3(5.0f, 1.21f, -130.0f);
 
 	mp_Position[13] = D3DXVECTOR3(-34.8f, 1.21f, -130.0f);
 

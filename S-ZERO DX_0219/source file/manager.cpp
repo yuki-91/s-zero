@@ -47,6 +47,7 @@
 #include "jump_effect.h"
 #include "jump_board_reverse.h"
 #include "green_shell.h"
+#include "drifting_effect_mini.h"
 
 Light *CManager::m_Light;
 CScene *CManager::m_Scene;
@@ -92,11 +93,12 @@ void CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	CRoadCurveD::Create();
 	CSingnBoard::Create();
 	CX_model::Create();
-	//InitBullet();
+	InitBullet();
 	CExplosion::InitExplosion();
 	CDashEffect::Initdash_effect();
 	CSmokeEffect::Initsmoke_explosion();
 	CDriftingEffect::InitDrifting_effect();
+	CDrifting_MEffect::InitDrifting_M_effect();
 	CStEffect::InitStart_effect();
 	CKasokuEffect::InitKasoku_effect();
 	CCoinEffect::InitCoin_Effect();
@@ -121,6 +123,7 @@ void CManager::Uninit()
 	CDashEffect::Uninitdash_effect();
 	CSmokeEffect::Uninitsmoke_explosion();
 	CDriftingEffect::UninitDrifting_effect();
+	CDrifting_MEffect::UninitDrifting_M_effect();
 	CStEffect::UninitStart_effect();
 	CKasokuEffect::UninitKasoku_effect();
 	CCoinEffect::UninitCoin_Effect();
@@ -134,7 +137,7 @@ void CManager::Uninit()
 	CCoin::UninitCoin();
 	CJump::Uninitjump();
 	CJump_Reverse::Uninitjump();
-	//UninitBullet();
+	UninitBullet();
 	CDash::UninitItem();
 	CDashSide::UninitItem();
 	CScene::UninitAll();

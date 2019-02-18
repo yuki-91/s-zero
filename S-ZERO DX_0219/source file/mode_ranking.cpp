@@ -62,6 +62,8 @@ void CModeRanking::Init()
 {
 	count2 = 0;
 
+
+
 	MyScore = CModeGame::SougouScore();
 
 	FadeRankingCount = 0;
@@ -192,6 +194,7 @@ void CModeRanking::Init()
 
 void CModeRanking::Uninit()
 {
+	
 
 
 	for (int i = 0; i < TEXTURE_RANK_MAX; i++)

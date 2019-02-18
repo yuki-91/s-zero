@@ -32,7 +32,7 @@ typedef struct
 
 static const TEXTURE_STAR_EFFECT Texture_Star_effect[] =
 {
-	{ "data/texture/star.png",			960, 2688, 480, 384, 2, 13 }
+	{ "data/texture/‰ñ•œ16L.png",			960, 3840, 480, 384, 2, 19 }
 };
 
 typedef struct

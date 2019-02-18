@@ -30,6 +30,7 @@ public:
 	static void UpdateItem();
 	static void DrawItem();
 	static bool GetItem(); 
+	static bool GetItem2();
 private:
 	static LPDIRECT3DTEXTURE9 g_pTextures_bill[TEXTURE_ITEM_MAX];	//テクスチャ配列
 	static D3DXMATRIX g_mtxWorld_Item;		//ワールド変換行列
@@ -45,5 +46,6 @@ private:
 	static int Life[MAX_ITEMBOX];
 	static float  g_Rot4;
 	static bool b_item;
+	static bool b_item2;
 };
 #endif 

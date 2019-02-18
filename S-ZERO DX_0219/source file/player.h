@@ -31,7 +31,7 @@ public:
 	static void Draw();
 	void Release();
 	static D3DXVECTOR3 XmodelPos();
-	static float XmodelRot();
+	static D3DXVECTOR3 XmodelRot();
 	static bool modelUse();
 	static bool CX_model::deboost();
 	static bool CX_model::boost();

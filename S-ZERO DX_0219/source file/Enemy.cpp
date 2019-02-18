@@ -567,25 +567,19 @@ void CBillboard::UpdateBillboard()
 			if (ememy[Ememy])
 			{
 					//“–‚½‚è”»’è
-					if (CHit::AABB(D3DXVECTOR3(g_TransPos[Ememy].x - 0.4f, g_TransPos[Ememy].y - 1.0f, g_TransPos[Ememy].z - 0.4f),
-						D3DXVECTOR3(g_TransPos[Ememy].x + 0.4f, g_TransPos[Ememy].y + 1.0f, g_TransPos[Ememy].z + 0.4f),
-						D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) - mu,
-						D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) + mu) && CX_model::star_muteki() == false)
-					{
+				if (CHit::AABB(D3DXVECTOR3(g_TransPos[Ememy].x - 0.4f, g_TransPos[Ememy].y - 1.0f, g_TransPos[Ememy].z - 0.4f),
+					D3DXVECTOR3(g_TransPos[Ememy].x + 0.4f, g_TransPos[Ememy].y + 1.0f, g_TransPos[Ememy].z + 0.4f),
+					D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) - mu,
+					D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) + mu))
+				{
+
 					
-					/*	if (CX_model::star_muteki() == true)
-						{
-							g_TransPos[Ememy].x += 0.1f;
-							g_TransPos[Ememy].y += 0.1f;
-							g_TransPos[Ememy].z += 0.1f;
-						}
-						else
-						{*/
-							PlaySound(SOUND_LABEL_DAMAGE);
-							CExplosion::CreateExplosion(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
-							ememy[Ememy] = false;
-						//}
-						
+						PlaySound(SOUND_LABEL_DAMAGE);
+						CExplosion::CreateExplosion(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
+						ememy[Ememy] = false;
+
+					if (CX_model::star_muteki() == false)
+					{
 						e_coin -= 5;
 						b_hit = true;
 
@@ -593,6 +587,7 @@ void CBillboard::UpdateBillboard()
 						{
 							e_coin = 0;
 						}
+					}
 				}
 
 		}

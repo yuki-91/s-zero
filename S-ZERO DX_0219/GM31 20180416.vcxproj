@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source file\3d_stagegimic.cpp" />
+    <ClCompile Include="source file\drifting_effect_mini.cpp" />
     <ClCompile Include="source file\Enemy.cpp" />
     <ClCompile Include="source file\camera.cpp" />
     <ClCompile Include="source file\coin_effect.cpp" />
@@ -73,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source file\3d_stagegimic.h" />
+    <ClInclude Include="source file\drifting_effect_mini.h" />
     <ClInclude Include="source file\Enemy.h" />
     <ClInclude Include="source file\camera.h" />
     <ClInclude Include="source file\coin_effect.h" />

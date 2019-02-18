@@ -36,10 +36,10 @@ static D3DXMATRIX g_ShadowTrans[BULLET_MAX];
 static BULLET g_Bullet[BULLET_MAX];
 
 static int g_nFramecount = 0;
-float speedE = 0.25f;
+float speedE = 2.25f;
 
 static D3DXVECTOR3 ColorStock;
-
+D3DXMATRIX t_matrix;
 D3DXVECTOR3 rot;
 
 typedef struct
@@ -230,55 +230,55 @@ void UpdateBullet(void)
 
 	}
 
-	if (GetKeyboardTrigger(DIK_A))
-	{
-		rot.y -= 0.25;
-	}
+	//if (GetKeyboardTrigger(DIK_A))
+	//{
+	//	rot.y -= 0.25;
+	//}
 
-	if (GetKeyboardTrigger(DIK_D))
-	{
-		rot.y += 0.25;
-	}
+	//if (GetKeyboardTrigger(DIK_D))
+	//{
+	//	rot.y += 0.25;
+	//}
 
 
 	//弾発射
-	if (GetKeyboardTrigger(DIK_SPACE))
-	{
-		switch (g_BulletChange)
-		{
-		case 0:
+	//if (GetKeyboardTrigger(DIK_SPACE))
+	//{
+	//	switch (g_BulletChange)
+	//	{
+	//	case 0:
 
-			if (ColorStock.x > 25.0f)
-			{
-				CreateBullet(0.0f, 0);
-				ColorStock.x -= 20.0f;
-			}
+	//		if (ColorStock.x > 25.0f)
+	//		{
+	//			CreateBullet(0.0f, 0);
+	//			ColorStock.x -= 20.0f;
+	//		}
 
-			break;
+	//		break;
 
-		case 1:
-			if (ColorStock.y > 25.0f)
-			{
-				CreateBullet(0.0f, 1);
-				ColorStock.y -= 20.0f;
-			}
+	//	case 1:
+	//		if (ColorStock.y > 25.0f)
+	//		{
+	//			CreateBullet(0.0f, 1);
+	//			ColorStock.y -= 20.0f;
+	//		}
 
-			break;
+	//		break;
 
-		case 2:
-			if (ColorStock.z > 25.0f)
-			{
+	//	case 2:
+	//		if (ColorStock.z > 25.0f)
+	//		{
 
-				CreateBullet(0.0f, 2);
-				ColorStock.z -= 20.0f;
-			}
-			break;
+	//			CreateBullet(0.0f, 2);
+	//			ColorStock.z -= 20.0f;
+	//		}
+	//		break;
 
-		default:
-			break;
+	//	default:
+	//		break;
 
-		}
-	}
+	//	}
+	//}
 
 	ColorStock.x += 0.10f;
 	ColorStock.y += 0.10f;
@@ -370,10 +370,13 @@ void DrawBullet(void)
 				D3DXMatrixTranslation(&g_Trans[a], g_TransPos[a].x, g_TransPos[a].y, g_TransPos[a].z);
 
 				//g_mtxWorld_Bullet = g_mtxWorld_Bullet * g_Rotation;
+				D3DXMatrixRotationYawPitchRoll(&t_matrix, CX_model::XmodelRot().y, CX_model::XmodelRot().x, CX_model::XmodelRot().z);    //  回転マトリクスの作成
 
 				g_mtxWorld_Bullet = g_mtxWorld_Bullet * g_viewInverse;
 
 				g_mtxWorld_Bullet = g_mtxWorld_Bullet * g_Trans[a];
+
+				g_mtxWorld_Bullet = g_mtxWorld_Bullet * t_matrix;
 
 				//ワールド行列の設定(好きなタイミングで呼ぶ)
 				pDevice->SetTransform(D3DTS_WORLD, &g_mtxWorld_Bullet);
@@ -398,11 +401,11 @@ void CreateBullet(float radian, int color)
 		if (!g_Bullet[i].bUse)
 		{
 			//アングル = 2π * 角度(0~360) / 360
-			t = 2.0f * 3.14f * (CX_model::XmodelRot() + radian) / 360.0f;
+			//t = 2.0f * 3.14f * (CX_model::XmodelRot() + radian) / 360.0f;
 
 			g_Bullet[i].vPos = D3DXVECTOR3(CX_model::XmodelPos().x , CX_model::XmodelPos().y + 0.9f, CX_model::XmodelPos().z);
 
-			g_Bullet[i].vDir = D3DXVECTOR3(rot.y, 0.0f, rot.y);
+			//g_Bullet[i].vDir = D3DXVECTOR3(cos(t), 0.0f, sin(t));
 
 			g_Bullet[i].color = color;
 

@@ -52,6 +52,8 @@
 #include "fade.h"
 #include"jump_board_reverse.h"
 #include"green_shell.h"
+#include"drifting_effect_mini.h"
+
 CField *CModeGame::m_Field;
 CScore *CModeGame::m_Score;
 Camera *CModeGame::m_camera;
@@ -79,7 +81,9 @@ bool CModeGame::startTime = false;
 bool CModeGame::dash = false;
 int CModeGame::color;
 int CModeGame::item_count = 0;
+int CModeGame::item_count2 = 0;
 int CModeGame::hatena_a = 0;
+int CModeGame::hatena2_a = 0;
 int CModeGame::kinoko_a = 0;
 int CModeGame::kinoko2_a = 0;
 int CModeGame::kinoko3_a = 0;
@@ -87,6 +91,16 @@ int CModeGame::p_kinoko_a = 0;
 int CModeGame::green__shell_a = 0;
 int CModeGame::coin_a = 0;
 int CModeGame::star_a = 0;
+
+
+int CModeGame::kinoko_a_keep = 0;
+int CModeGame::kinoko2_a_keep = 0;
+int CModeGame::kinoko3_a_keep = 0;
+int CModeGame::p_kinoko_a_keep = 0;
+int CModeGame::green__shell_a_keep = 0;
+int CModeGame::coin_a_keep = 0;
+int CModeGame::star_a_keep = 0;
+
 int CModeGame::Dtime;
 int CModeGame::Dtime2;
 int CModeGame::Dtime3;
@@ -99,6 +113,7 @@ bool CModeGame::b_green_shell = false;
 bool CModeGame::b_coin_x = false;
 bool CModeGame::b_star_x = false;
 bool CModeGame::hatenafal = false;
+bool CModeGame::hatenafal2 = false;
 bool CModeGame::itemget = false;
 int CModeGame::result = 0;
 bool CModeGame::rap = false;
@@ -113,9 +128,15 @@ float CModeGame::x_map;
 float CModeGame::z_map;
 int CModeGame::lastlap = false;
 int CModeGame::item_rand = 0;
+int CModeGame::item_rand2 = 0;
 bool CModeGame::hatena_bgm = false;
+bool CModeGame::hatena_bgm2 = false;
 int CModeGame::OpIn = 0;
 int CModeGame::FadeOpCount = 0;
+
+bool CModeGame::hatena_change = false;
+bool CModeGame::hatena_button = false;
+bool CModeGame::triple_kinoko_seigyo = false;
 
 void CModeGame::Init()
 {
@@ -144,7 +165,9 @@ void CModeGame::Init()
 	dash = false;
 	color = 0;
 	item_count = 0;
+	item_count2 = 0;
 	hatena_a = 0;
+	hatena2_a = 0;
 	kinoko_a = 0;
 	kinoko2_a = 0;
 	kinoko3_a = 0;
@@ -152,6 +175,15 @@ void CModeGame::Init()
 	green__shell_a = 0;
 	coin_a = 0;
 	star_a = 0;
+
+	kinoko_a_keep = 0;
+	kinoko2_a_keep = 0;
+	kinoko3_a_keep = 0;
+	p_kinoko_a_keep = 0;
+	green__shell_a_keep = 0;
+	coin_a_keep = 0;
+	star_a_keep = 0;
+
 	b_kinoko_x = false;
 	b_kinoko1_x = false;
 	b_kinoko2_x = false;
@@ -160,6 +192,7 @@ void CModeGame::Init()
 	b_coin_x = false;
 	b_star_x = false;
 	hatenafal = false;
+	hatenafal2 = false;
 	itemget = false;
 	result = 0;
 	rap = false;
@@ -171,14 +204,21 @@ void CModeGame::Init()
 	jug2 = false;
 	jug_last_y = 0;
 	item_rand = 0;
+	item_rand2 = 0;
 	OpIn = 0;
 	FadeOpCount = 0;
+
+	hatena_bgm = false;
+	hatena_bgm2 = false;
+	hatena_button = false;
+	triple_kinoko_seigyo = false;
 }
 
 void CModeGame::Uninit()
 {
 	m_camera->Release();
 	StopSound(SOUND_LABEL_ITEMBOX);
+
 	m_Field->DestroyMeshfield();
 	delete m_Field;
 }
@@ -192,7 +232,7 @@ void CModeGame::Update()
 	CXmodel::Update();
 	CGate::UpdateGate();
 	CBillboard::UpdateBillboard();
-	//UpdateBullet();
+	UpdateBullet();
 	CShadow::UpdateShadow();
 	CTreeBill::UpdateTreeBill();
 	CItem::UpdateItem();
@@ -205,6 +245,7 @@ void CModeGame::Update()
 	CDashEffect::Updatedash_effect();
 	CSmokeEffect::Updatesmoke_explosion();
 	CDriftingEffect::UpdateDrifting_effect();
+	CDrifting_MEffect::UpdateDrifting_M_effect();
 	CStEffect::UpdateStart_effect();
 	CKasokuEffect::UpdateKasoku_effect();
 	CCoinEffect::UpdateCoin_Effect();
@@ -247,7 +288,7 @@ void CModeGame::Update()
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) - mu,
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) + mu))
 	{
-			TargetPoint2 = true;
+		TargetPoint2 = true;
 	}
 
 	if (CHit::AABB(D3DXVECTOR3(100.0f, -5.0f, -150.0f),
@@ -255,7 +296,7 @@ void CModeGame::Update()
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) - mu,
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) + mu))
 	{
-			TargetPoint3 = true;
+		TargetPoint3 = true;
 	}
 
 	if (CHit::AABB(D3DXVECTOR3(100.0f, -5.0f, 100.0f),
@@ -263,7 +304,7 @@ void CModeGame::Update()
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) - mu,
 		D3DXVECTOR3(CX_model::XmodelPos().x, CX_model::XmodelPos().y - 1, CX_model::XmodelPos().z) + mu))
 	{
-			TargetPoint4 = true;
+		TargetPoint4 = true;
 	}
 
 	if (TargetPoint&&TargetPoint2&&TargetPoint3&&TargetPoint4)
@@ -292,7 +333,7 @@ void CModeGame::Update()
 	{
 		PlaySound(SOUND_LABEL_SE_COUNTDOWN);
 	}
-	
+
 	if (Lap != 3)
 	{
 		if (startTime) {
@@ -341,7 +382,7 @@ void CModeGame::Update()
 		threetime = Dtime3;
 	}
 
-	
+
 	//カウント開始
 	if (ModelLife == 0)
 	{
@@ -369,7 +410,7 @@ void CModeGame::Update()
 		bCount2 = false;
 		use = false;
 		dash = false;
-		
+
 	}
 	//カウント0のとき
 	if (ModelLife > 190)
@@ -392,141 +433,168 @@ void CModeGame::Update()
 	if (bCount0) {
 		jug2 -= 6;
 	}
-		if (!bCount0) {
-			if (jugemu >= 7.0f)
-			{
-				jug = false;
-			}
-			if (jugemu <= 0.0f)
-			{
-				jug = true;
-			}
-			if (jug == true)
-			{
-				jugemu += 0.4f;
-			}
-			else {
-				jugemu -= 0.4f;
-			}
+
+	if (!bCount0) {
+		if (jugemu >= 7.0f)
+		{
+			jug = false;
 		}
+		if (jugemu <= 0.0f)
+		{
+			jug = true;
+		}
+		if (jug == true)
+		{
+			jugemu += 0.4f;
+		}
+		else {
+			jugemu -= 0.4f;
+		}
+	}
 
-		//ミニマップ
-		x_map = CX_model::XmodelPos().x;
-		z_map = -CX_model::XmodelPos().z;
+	//ミニマップ
+	x_map = CX_model::XmodelPos().x;
+	z_map = -CX_model::XmodelPos().z;
 
 
-		//アイテム獲得
-		if (CItem::GetItem() == true && hatenafal == false) {
+
+	//アイテム獲得
+	if (CItem::GetItem() == true )
+	{
+		if (!hatenafal)
+		{
 			item_count++;
 			hatena_a = 255;
-			b_kinoko_x = false;
-			b_kinoko2_x = false;
-			b_kinoko3_x = false;
-			b_coin_x = false;
-			b_star_x = false;
-			item_rand = rand()%5 + 1;
-			//item_rand = 5;
+			hatena_change = false;
+			item_rand = rand() % 4 + 1;
+			//item_rand = 1;
 			hatena_bgm = true;
 		}
+	}
 
-		if (item_count >= 200) {
-			//きのこ
-			if (item_rand == 1) {
-				kinoko_a = 255;
-				b_kinoko_x = true;
+	if (CItem::GetItem2() == true && hatenafal )
+	{
+		if (!hatenafal2)
+		{
+			hatena_button = true;
+			item_count2++;
+			hatena2_a = 255;
+			item_rand2 = rand() % 4 + 1;
+			//item_rand2 = 1;
+			hatena_bgm2 = true;
+		}
+	}
+
+
+	if (item_count >= 200)
+	{
+		//きのこ
+		if (item_rand == 1) {
+			kinoko_a = 255;
+			b_kinoko_x = true;
+		}
+		//コイン
+		if (item_rand == 2) {
+			coin_a = 255;
+			b_coin_x = true;
+		}
+		//スター
+		if (item_rand == 3) {
+			star_a = 255;
+			b_star_x = true;
+		}
+		//トリプルダッシュキノコ
+		if (item_rand == 4) {
+			kinoko3_a = 255;
+			b_kinoko3_x = true;
+			b_kinoko2_x = false;
+			b_kinoko1_x = false;
+		}
+		//パワフルダッシュキノコ
+		if (item_rand == 5) {
+			p_kinoko_a = 255;
+			b_pw_kinoko_x = true;
+		}
+		//緑甲羅
+		if (item_rand == 6) {
+			green__shell_a = 255;
+			b_green_shell = true;
+		}
+
+
+		hatenafal = true;
+	}
+	else {
+		b_kinoko_x = false;
+		b_coin_x = false;
+		b_star_x = false;
+	}
+		//アイテム使用
+		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !hatena_button || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false)  && !hatena_button)
+		{
+			if (b_kinoko_x || b_pw_kinoko_x) {
+				PlaySound(SOUND_LABEL_WAHAAKINO);
 			}
-			//コイン
-			if (item_rand == 2) {
-				coin_a = 255;
-				b_coin_x = true;
+			if (b_coin_x) {
+				PlaySound(SOUND_LABEL_SE_COIN);
 			}
-			//スター
-			if (item_rand == 3) {
-				star_a = 255;
-				b_star_x = true;
-			}
-			//トリプルダッシュキノコ
-			if (item_rand == 4) {
-				kinoko3_a = 255;
-				b_kinoko3_x = true;
-				b_kinoko2_x = false;
-				b_kinoko1_x = false;
-			}
-			//パワフルダッシュキノコ
-			if (item_rand == 5) {
-				p_kinoko_a = 255;
-				b_pw_kinoko_x = true;
-			}
-			//緑甲羅
-			if (item_rand == 6) {
-				green__shell_a = 255;
-				b_green_shell = true;
+			if (b_star_x) {
+				PlaySound(SOUND_LABEL_STAR);
 			}
 			
-			hatenafal = true;
-			
-			//アイテム使用
-			if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) || (GetKeyboardTrigger(DIK_L)&& CX_model::kinohit()== false))
+			coin_a = 0;
+			star_a = 0;
+			kinoko_a = 0;
+
+			item_count = 0;
+
+			b_kinoko_x = false;
+			b_coin_x = false;
+			b_star_x = false;
+
+			if (b_kinoko3_x || b_kinoko2_x || b_kinoko1_x || b_pw_kinoko_x) {
+				hatenafal = true;
+			}
+			else
 			{
-				if (b_kinoko_x || b_pw_kinoko_x) {
-					PlaySound(SOUND_LABEL_WAHAAKINO);
-				}
-				if (b_coin_x) {
-					PlaySound(SOUND_LABEL_SE_COIN);
-				}
-				if (b_star_x) {
-					PlaySound(SOUND_LABEL_STAR);
-				}
-				item_count = 0;
-				coin_a = 0;
-				star_a = 0;
-				kinoko_a = 0;
+				hatenafal = false;
+			}
 
-				if (b_kinoko3_x  || b_kinoko2_x || b_kinoko1_x || b_pw_kinoko_x) {
-					hatenafal = true;
-				}
-				else
-				{
-					hatenafal = false;
-				}
-
-				hatena_bgm = false;
-			}
-			}
-			else {
-				b_kinoko_x = false;
-				b_coin_x = false;
-				b_star_x = false;
-			}
+			hatena_bgm = false;
+		}
+	
+			
 
 		//トリプルダッシュキノコ処理
-		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && b_kinoko1_x &&!b_kinoko2_x&&!CX_model::Getkinoko_count() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && b_kinoko1_x&&!b_kinoko2_x&&!CX_model::Getkinoko_count())
+		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && b_kinoko1_x &&!b_kinoko2_x&&!CX_model::Getkinoko_count() && !hatena_button || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && b_kinoko1_x&&!b_kinoko2_x&&!CX_model::Getkinoko_count() && !hatena_button)
 		{
 			PlaySound(SOUND_LABEL_WAHAAKINO);
 			kinoko_a = 0;
+			triple_kinoko_seigyo = false;
 			b_kinoko3_x = false;
 			b_kinoko1_x = false;
 			b_kinoko2_x = false;			
 			hatenafal = false;
 		}
 
-		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko3_x &&b_kinoko2_x&&!CX_model::Getkinoko_count() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko3_x && b_kinoko2_x&&!CX_model::Getkinoko_count())
+		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko3_x &&b_kinoko2_x&&!CX_model::Getkinoko_count() && !hatena_button || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko3_x && b_kinoko2_x&&!CX_model::Getkinoko_count() && !hatena_button)
 		{
 
 			PlaySound(SOUND_LABEL_WAHAAKINO);
 			kinoko2_a = 0;
 			kinoko_a = 255;
-		
+			triple_kinoko_seigyo = true;
 			b_kinoko1_x = true;
 			b_kinoko2_x = false;
 			b_kinoko3_x = false;
 		}
 
-		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false)&& !b_kinoko2_x && b_kinoko3_x&&!CX_model::Getkinoko_count() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false)&& !b_kinoko2_x&& b_kinoko3_x&&!CX_model::Getkinoko_count())
+		if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false)&& !b_kinoko2_x && b_kinoko3_x&&!CX_model::Getkinoko_count() && !hatena_button || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false)&& !b_kinoko2_x&& b_kinoko3_x&&!CX_model::Getkinoko_count() && !hatena_button)
 		{
 			PlaySound(SOUND_LABEL_WAHAAKINO);
 			kinoko2_a = 255;
 			kinoko3_a = 0;
+			triple_kinoko_seigyo = true;
 			b_kinoko1_x = false;
 			b_kinoko2_x = true;
 			b_kinoko3_x = false;
@@ -545,6 +613,104 @@ void CModeGame::Update()
 			jug_last_y -= 3;
 		}
 
+		if (item_count2 >= 200)
+		{
+			hatena_button = false;
+			//hatena2_a = 0;
+			//きのこ
+			if (item_rand2 == 1) {
+				kinoko_a_keep = 255;
+			}
+			//コイン
+			if (item_rand2 == 2) {
+				coin_a_keep = 255;
+			}
+			//スター
+			if (item_rand2 == 3) {
+				star_a_keep = 255;
+			}
+			//トリプルダッシュキノコ
+			if (item_rand2 == 4) {
+				kinoko3_a_keep = 255;
+			}
+			//パワフルダッシュキノコ
+			if (item_rand2 == 5) {
+				p_kinoko_a_keep = 255;
+			}
+			//緑甲羅
+			if (item_rand2 == 6) {
+				green__shell_a_keep = 255;
+			}
+			hatenafal2 = true;
+		}
+			if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !hatena_button || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !hatena_button)
+			{
+				//item_count = 200;
+				if (!b_kinoko3_x && !b_kinoko2_x &&!b_kinoko1_x)
+				{
+
+					//if (hatena2_a == 255)
+					//{
+					//	//hatenafal = false;
+					//	/*item_count = 0;
+					//	item_count++;*/
+					//	//hatena_a = 255;
+					//	//item_rand = rand() % 4 + 1;
+					//	//hatenafal = true;
+					//	hatena_change = true;
+					//	hatena2_a = 0;
+					//}
+
+					if (kinoko_a_keep == 255)
+					{
+						item_rand = 1;
+						item_count = 200;
+						hatenafal = true;
+						kinoko_a_keep = 0;
+
+					}
+					if (coin_a_keep == 255)
+					{
+						item_rand = 2;
+						item_count = 200;
+						hatenafal = true;
+						coin_a_keep = 0;
+
+					}
+
+					if (star_a_keep == 255)
+					{
+						item_rand = 3;
+						item_count = 200;
+						hatenafal = true;
+						star_a_keep = 0;
+
+					}
+					if (kinoko3_a_keep == 255)
+					{
+						item_rand = 4;
+						item_count = 200;
+						hatenafal = true;
+						kinoko3_a_keep = 0;
+
+					}
+					if (p_kinoko_a_keep == 255)
+					{
+						item_rand = 5;
+						item_count = 200;
+						hatenafal = true;
+						p_kinoko_a_keep = 0;
+
+					}
+
+				}
+				green__shell_a_keep = 0;
+				hatenafal2 = false;
+				hatena_bgm2 = false;
+				item_count2 = 0;
+			}
+
+		
 }
 
 void CModeGame::Draw()
@@ -553,11 +719,12 @@ void CModeGame::Draw()
 	CX_model::Draw();
 	CXmodel::Draw();
 	CGate::DrawGate();
-	//DrawBullet();
+	DrawBullet();
 	CExplosion::DrawExplosion();
 	CDashEffect::Drawdash_effect();
 	CSmokeEffect::Drawsmoke_explosion();
 	CDriftingEffect::DrawDrifting_effect();
+	CDrifting_MEffect::DrawDrifting_M_effect();
 	CStEffect::DrawStart_effect();
 	CKasokuEffect::DrawKasoku_effect();
 	CCoinEffect::DrawCoin_Effect();
@@ -584,9 +751,9 @@ void CModeGame::Draw()
 	//g_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),D3DCOLOR_RGBA(255,255,255,255),1.0F,0);
 	m_Score->DrawScore(Dtime, 5, 100, -90, false);
 	
-	m_Score->DrawScore(CCoin::ScoreCoin(), 2, 90, 525, false);
+	
 
-	//ラップ数
+	//ラップ数タイム
 	if (Lap >= 1) {
 		m_Score->DrawScore(onetime, 5, 100, 0, false);
 		CPolygon::PolygonDraw2(4, D3DCOLOR_RGBA(255, 255, 255, 255), 0, 100, 100, 50, 100, 50, 0, 0, 100, 50);
@@ -610,13 +777,13 @@ void CModeGame::Draw()
 	
 	//Lap数
 	if (Lap == 0) {
-		CPolygon::PolygonDraw2(4, D3DCOLOR_RGBA(255, 255, 255, 255), 900, 560, 437, 187, 437, 187, 0, 0, 437, 187);
+		CPolygon::PolygonDraw2(4, D3DCOLOR_RGBA(255, 255, 255, 255), 1000, 660, 337, 107, 337, 107, 0, 0, 337, 107);
 	}
 	if (Lap == 1) {
-		CPolygon::PolygonDraw2(5, D3DCOLOR_RGBA(255, 255, 255, 255), 900, 560, 437, 187, 437, 187, 0, 0, 437, 187);
+		CPolygon::PolygonDraw2(5, D3DCOLOR_RGBA(255, 255, 255, 255), 1000, 660, 337, 107, 337, 107, 0, 0, 337, 107);
 	}
 	if (Lap == 2) {
-		CPolygon::PolygonDraw2(6, D3DCOLOR_RGBA(255, 255, 255, 255), 900, 560, 437, 187, 437, 187, 0, 0, 437, 187);
+		CPolygon::PolygonDraw2(6, D3DCOLOR_RGBA(255, 255, 255, 255), 1000, 660, 337, 107, 337, 107, 0, 0, 337, 107);
 		if (lastlap <= 500) {
 			CPolygon::PolygonDraw2(3, D3DCOLOR_RGBA(255, 255, 255, 255), 700, 100 + jugemu + jug_last_y, 300, 300, 300, 300, 0, 0, 300, 300);
 		}
@@ -640,9 +807,11 @@ void CModeGame::Draw()
 	if (bCount0) {
 		CPolygon::PolygonDraw2(12, D3DCOLOR_RGBA(255, 255, 255, 255), 470, 290, 501, 253, 501, 253, 0, 0, 501, 253);
 		CPolygon::PolygonDraw2(24, D3DCOLOR_RGBA(255, 255, 255, 255), 800.0f, 100.0f + jug2, 300.0f, 300.0f, 300, 300, 0, 0, 300, 300);
+		
 	}
 	//コイン数
-	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, 255), 10, 610, 80, 80, 80, 80, 0, 0, 80, 80);
+	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, 255), 10, 660, 80, 80, 80, 80, 0, 0, 80, 80);
+	m_Score->DrawScore(CCoin::ScoreCoin(), 2, 90, 575, false);
 
 	//マップ
 	CPolygon::PolygonDraw2(28, D3DCOLOR_RGBA(255, 255, 255, 255), 980, 10, 490, 320, 490, 320, 0, 0, 490, 320);
@@ -650,37 +819,68 @@ void CModeGame::Draw()
 	//マップ水
 	CPolygon::PolygonDraw2(20, D3DCOLOR_RGBA(255, 255, 255, 255), 1200.0f, 230.0f, 75, 75, 75, 75, 0, 0, 75, 75);
 
-	//マップ
+	//マップマリオ
 	CPolygon::PolygonDraw2(29, D3DCOLOR_RGBA(255, 255, 255, 255), 1200.0f + x_map, 150.0f + z_map, 45, 45, 45, 45, 0, 0, 45, 45);
 	
 
 	//丸
-	CPolygon::PolygonDraw2(15, D3DCOLOR_RGBA(255, 255, 255, 255), 330, 10, 200, 200, 200, 200, 0, 0, 200, 200);
+	CPolygon::PolygonDraw2(15, D3DCOLOR_RGBA(255, 255, 255, 255), 375, 10, 200, 200, 200, 200, 0, 0, 200, 200);
+
+	//丸2
+	CPolygon::PolygonDraw2(15, D3DCOLOR_RGBA(255, 255, 255, 255), 315, 5, 90, 90, 90, 90, 0, 0, 90, 90);
 
 	if (CItem::GetItem() == true) {
 		//はてな
-		CPolygon::PolygonDraw2(16, D3DCOLOR_RGBA(color *1, color *2, color *3, hatena_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+		CPolygon::PolygonDraw2(16, D3DCOLOR_RGBA(color *1, color *2, color *3, hatena_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 	}
+	
 	//キノコ
-	CPolygon::PolygonDraw2(17, D3DCOLOR_RGBA(255, 255, 255, kinoko_a),350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(17, D3DCOLOR_RGBA(255, 255, 255, kinoko_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//トリプルダッシュキノコ
-	CPolygon::PolygonDraw2(30, D3DCOLOR_RGBA(255, 255, 255, kinoko3_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(30, D3DCOLOR_RGBA(255, 255, 255, kinoko3_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//ダブルダッシュキノコ
-	CPolygon::PolygonDraw2(31, D3DCOLOR_RGBA(255, 255, 255, kinoko2_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(31, D3DCOLOR_RGBA(255, 255, 255, kinoko2_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//コイン
-	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, coin_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, coin_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//スター
-	CPolygon::PolygonDraw2(2, D3DCOLOR_RGBA(255, 255, 255, star_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(2, D3DCOLOR_RGBA(255, 255, 255, star_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//パワフルダッシュキノコ
-	CPolygon::PolygonDraw2(33, D3DCOLOR_RGBA(255, 255, 255, p_kinoko_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(33, D3DCOLOR_RGBA(255, 255, 255, p_kinoko_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
 
 	//緑甲羅
-	CPolygon::PolygonDraw2(34, D3DCOLOR_RGBA(255, 255, 255, green__shell_a), 350.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+	CPolygon::PolygonDraw2(34, D3DCOLOR_RGBA(255, 255, 255, green__shell_a), 395.0f, 30.0f, 150.0f, 150.0f, 150, 150, 0, 0, 150, 150);
+
+	//保留アイテム
+	if (CItem::GetItem2() == true) {
+		//はてな2
+		CPolygon::PolygonDraw2(16, D3DCOLOR_RGBA(255, 255, 255, hatena2_a), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+	}
+
+	//キノコ
+	CPolygon::PolygonDraw2(17, D3DCOLOR_RGBA(255, 255, 255, kinoko_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//トリプルダッシュキノコ
+	CPolygon::PolygonDraw2(30, D3DCOLOR_RGBA(255, 255, 255, kinoko3_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//ダブルダッシュキノコ
+	CPolygon::PolygonDraw2(31, D3DCOLOR_RGBA(255, 255, 255, kinoko2_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//コイン
+	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, coin_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//スター
+	CPolygon::PolygonDraw2(2, D3DCOLOR_RGBA(255, 255, 255, star_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//パワフルダッシュキノコ
+	CPolygon::PolygonDraw2(33, D3DCOLOR_RGBA(255, 255, 255, p_kinoko_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
+
+	//緑甲羅
+	CPolygon::PolygonDraw2(34, D3DCOLOR_RGBA(255, 255, 255, green__shell_a_keep), 325.0f, 15.0f, 65.0f, 65.0f, 65.0f, 65.0f, 0, 0, 65.0f, 65.0f);
 
 	//逆走ジュゲム
 	if (TargetPoint && !TargetPoint2 && !TargetPoint3 && TargetPoint4)
@@ -778,6 +978,11 @@ bool  CModeGame::Gethatena()
 	return hatenafal;
 }
 
+bool  CModeGame::Gethatena2()
+{
+	return hatenafal2;
+}
+
 bool  CModeGame::Getkinoko_X()
 {
 	return b_kinoko_x;
@@ -818,6 +1023,11 @@ bool  CModeGame::Hatena_Bgm()
 	return hatena_bgm;
 }
 
+bool  CModeGame::Hatena_Bgm2()
+{
+	return hatena_bgm2;
+}
+
 int  CModeGame::SougouScore()
 {
 	return Dtime;
@@ -829,4 +1039,19 @@ int  CModeGame::GOAL()
 
 	return Lap;
 
+}
+
+bool  CModeGame::Hatena_Change()
+{
+	return hatena_change;
+}
+
+bool  CModeGame::Hatena_Button()
+{
+	return hatena_button;
+}
+
+bool  CModeGame::Get_Triple_seigyo()
+{
+	return triple_kinoko_seigyo;
 }
