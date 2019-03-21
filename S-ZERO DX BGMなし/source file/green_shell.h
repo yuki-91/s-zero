@@ -38,9 +38,9 @@ typedef struct
 
 static const TEXTURE_BULLET g_aTexture_Bullet[] =
 {
-	{ "data/texture/03830a7e38159ea2093564140a50b928.png" },
-	{ "data/texture/03830a7e38159ea2093564140a50b928.png" },
-	{ "data/texture/03830a7e38159ea2093564140a50b928.png" },
+	{ "data/texture/green_shell.png" },
+	{ "data/texture/green_shell.png" },
+	{ "data/texture/green_shell.png" },
 	{ "data/texture/shadow000.jpg" },
 
 };

@@ -45,7 +45,7 @@ void CStageGimic::Init(void)
 	m_Device = CRender::GetD3DDevice();
 	m_Device->CreateVertexBuffer(sizeof(VERTEX3D) * 4, D3DUSAGE_WRITEONLY, FVF_VERTEX3D, D3DPOOL_MANAGED, &m_pVertexBuffer, NULL);
 	m_Device->CreateIndexBuffer(sizeof(WORD) * 6, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_MANAGED, &m_pIndexBuffer, NULL);
-	D3DXCreateTextureFromFile(m_Device, "data\\texture\\DSC00785.png", &m_Texture);
+	D3DXCreateTextureFromFile(m_Device, "data\\texture\\water_zone.png", &m_Texture);
 
 	VERTEX3D v[] = {
 		{ D3DXVECTOR3(-40, 0, 40),D3DXVECTOR3(0, 1, 0),D3DCOLOR_RGBA(255,255,255,255),D3DXVECTOR2(0.0f,0.0f) },

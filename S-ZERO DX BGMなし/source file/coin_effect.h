@@ -7,6 +7,7 @@
 #ifndef _COINEFFECT_H_
 #define _COINEFFECT_H_
 #include "main.h"
+#include "effect.h"
 #define COIN_EFFECT_MAX (300)
 
 enum TEXTURE_ENUM7
@@ -44,7 +45,7 @@ typedef struct
 }COIN_EFFECT;
 
 
-class CCoinEffect {
+class CCoinEffect :public CEffect{
 public:
 	static void InitCoin_Effect(void);
 	static void UninitCoin_Effect(void);

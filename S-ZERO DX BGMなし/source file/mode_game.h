@@ -46,8 +46,6 @@ public:
 	static bool Hatena_Bgm2();
 	static bool Hatena_Change();
 	static bool Hatena_Change2();
-	static bool Hatena_Button();
-	static bool Get_Triple_seigyo();
 	static bool Hatena_end();
 
 private:
@@ -128,8 +126,6 @@ private:
 	static int FadeOpCount;
 	static bool hatena_change;
 	static bool hatena_change2;
-	static bool hatena_button;
-	static bool triple_kinoko_seigyo;
 	static int pw_dash_time;
 	static bool b_pw;
 	static bool hatena_end;

@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="source file\3d_stagegimic.h" />
     <ClInclude Include="source file\drifting_effect_mini.h" />
+    <ClInclude Include="source file\effect.h" />
     <ClInclude Include="source file\Enemy.h" />
     <ClInclude Include="source file\camera.h" />
     <ClInclude Include="source file\coin_effect.h" />

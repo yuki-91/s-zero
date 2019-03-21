@@ -202,10 +202,6 @@ void CItem::UpdateItem()
 		b_item2 = false;
 	}
 
-	if (CModeGame::Hatena_end() == true)
-	{
-		b_item = false;
-	}
 
 	D3DXVECTOR3 mu = D3DXVECTOR3(0.4f, 0.2f, 0.4f);
 
@@ -232,7 +228,7 @@ void CItem::UpdateItem()
 					//	PlaySound(SOUND_LABEL_ITEMBOX);
 					}
 				}else
-				if (CModeGame::Gethatena2() == false && !CModeGame::Get_Triple_seigyo())
+				if (CModeGame::Gethatena2() == false )
 				{
 					b_item2 = true;
 					if (CModeGame::Hatena_Bgm2() == false)

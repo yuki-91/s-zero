@@ -62,6 +62,8 @@ void CModeRanking::Init()
 {
 	count2 = 0;
 
+	
+
 	MyScore = CModeGame::SougouScore();
 
 	FadeRankingCount = 0;

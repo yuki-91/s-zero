@@ -32,7 +32,7 @@ typedef struct
 
 static const TEXTURE_KASOKU_EFFECT Texture_Kasoku_effect[] =
 {
-	{ "data/texture/beac07392fb6280812c3133eb8917f1a_waifu2x_art_noise3_scale_tta_1.png",			1280, 768, 256, 256, 5, 14 }
+	{ "data/texture/kinoko_kasoku.png",			1280, 768, 256, 256, 5, 14 }
 };
 
 typedef struct

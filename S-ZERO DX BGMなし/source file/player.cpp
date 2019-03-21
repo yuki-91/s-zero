@@ -51,9 +51,9 @@
 #define VALUE_GRAVITY (0.10f)			// 重力量
 #define VALUE_GRAVITY_DRIFT (0.10f)		//ドリフトジャンプ重力 
 #define HANDLE_SPEED 0.001f				//ハンドルカウント
-#define DRIFT_ANGLE 0.001f				//ドリフト移動角度
+#define DRIFT_ANGLE 0.0005f				//ドリフト移動角度
 #define HANDLE_DRIFT_MAX 0.03f			//ドリフト移動角度マックス
-#define DRIFT_FORCE 0.01f				//ドリフト遠心力
+#define DRIFT_FORCE 0.02f				//ドリフト遠心力
 #define DRIFT_FORCE_MAX 0.15f			//ドリフト遠心力マックス
 #define PLAYER_DRIFT_ROT 0.4f			//ドリフトプレイヤー角度
 
@@ -376,6 +376,7 @@ void CX_model::Update()
 	CX_model::Speed_Limit();
 	CX_model::Drift_Turbo();
 
+	//アイテム
 	CX_model::Item_Kinoko();
 	CX_model::Item_TripleKinoko();
 	CX_model::Item_Star();
@@ -494,6 +495,12 @@ void CX_model::Input_Button()
 			drift_state_right = false;
 		}
 
+		if (drift_state_left && drift_state_right)
+		{
+			drift_state_left = false;
+			drift_state_right = false;
+		}
+
 
 		float t = 2.0f * 3.141592653589793f * (g_Rot + 270.0f) / 360.0f;
 
@@ -514,15 +521,15 @@ void CX_model::Input_Button()
 		}
 		if (Camera::Get_back_millor() == false) {
 
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_A) && GetKeyboardPress(DIK_J)) KeyNumber += 10;
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_A) && !GetKeyboardPress(DIK_D) && GetKeyboardPress(DIK_J)) KeyNumber += 10;
 
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_B) || GetKeyboardPress(DIK_S)) KeyNumber += 100;
+			//if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_B) || GetKeyboardPress(DIK_S)) KeyNumber += 100;
 
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardPress(DIK_J)) KeyNumber += 1000;
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && !GetKeyboardPress(DIK_A) &&GetKeyboardPress(DIK_J)) KeyNumber += 1000;
 
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) || GetKeyboardPress(DIK_A)) KeyNumber += 10000;
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) || GetKeyboardPress(DIK_A) && !GetKeyboardPress(DIK_D)) KeyNumber += 10000;
 
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) || GetKeyboardPress(DIK_D)) KeyNumber += 100000;
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) || GetKeyboardPress(DIK_D) && !GetKeyboardPress(DIK_A)) KeyNumber += 100000;
 		}
 		//移動したい向きのベクトル
 		KeyVec = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
@@ -1036,7 +1043,7 @@ void CX_model::Drift_Turbo()
 void CX_model::Item_Kinoko()
 {
 	//アイテムキノコ使用
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false|| GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko_X() == true) && b_kinoko_hit == false && pos_y == false )
 	{
 		CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
 		kino = true;
@@ -1063,7 +1070,7 @@ void CX_model::Item_TripleKinoko()
 	kino_count = false;
 
 	//トリプルキノコ使用
-	bool isUsedTripleKinoko = (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button());
+	bool isUsedTripleKinoko = (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false  || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false || MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false|| GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko3_X() == true) && b_kinoko_hit == false && pos_y == false  || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko2_X() == true) && b_kinoko_hit == false && pos_y == false  || GetKeyboardTrigger(DIK_L) && (CModeGame::Getkinoko1_X() == true) && b_kinoko_hit == false && pos_y == false);
 	if (isUsedTripleKinoko)
 	{
 		CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
@@ -1093,7 +1100,7 @@ void CX_model::Item_Star()
 	star_speed = 0.0f;
 
 	//アイテムスター使用
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false )
 	{
 		star = true;
 	}
@@ -1113,7 +1120,7 @@ void CX_model::Item_Star()
 
 	if (star_time <= 420 && star_time >= 1)
 	{
-		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
+		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && (CModeGame::Getstar_X() == true) && b_kinoko_hit == false && pos_y == false)
 		{
 			star_time = 0;
 		}
@@ -1153,7 +1160,7 @@ void CX_model::Item_PWKinoko()
 	else if (pw_dash_time > 1)
 	{
 		b_use_pw = true;
-		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && b_kinoko_hit == false && pos_y == false && !CModeGame::Hatena_Button())
+		if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && b_kinoko_hit == false && pos_y == false || GetKeyboardTrigger(DIK_L) && b_kinoko_hit == false && pos_y == false )
 		{
 			PlaySound(SOUND_LABEL_WAHAAKINO);
 			CKasokuEffect::CreateKasoku_effect(CX_model::XmodelPos().x, CX_model::XmodelPos().y + 1.0f, CX_model::XmodelPos().z);
@@ -1352,7 +1359,7 @@ void CX_model::Jump_Action()
 
 	}
 
-	if (fJump > 3.2f || GetKeyboardRelease(DIK_J) && CJump::HitPlayer() || GetKeyboardRelease(DIK_J) && CJump_Reverse::HitPlayer() || MyInputGamepad::GetButtonRelease(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) && CJump::HitPlayer() || MyInputGamepad::GetButtonRelease(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) && CJump_Reverse::HitPlayer())
+	if (fJump > 2.2f || GetKeyboardRelease(DIK_J) && CJump::HitPlayer() || GetKeyboardRelease(DIK_J) && CJump_Reverse::HitPlayer() || MyInputGamepad::GetButtonRelease(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) && CJump::HitPlayer() || MyInputGamepad::GetButtonRelease(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) && CJump_Reverse::HitPlayer())
 	{
 		bUp = false;
 		bUp_d = false;
@@ -1463,7 +1470,7 @@ void CX_model::Drift_BGM() {
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardPress(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_A) && GetKeyboardPress(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
@@ -1473,7 +1480,7 @@ void CX_model::Drift_BGM() {
 		PlaySound(SOUND_LABEL_DRIFT);
 	}
 
-	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_D) && GetKeyboardTrigger(DIK_J))
+	if (MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardTrigger(DIK_A) && GetKeyboardTrigger(DIK_J))
 	{
 		PlaySound(SOUND_LABEL_DRIFT);
 	}

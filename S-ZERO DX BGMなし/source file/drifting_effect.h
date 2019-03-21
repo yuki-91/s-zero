@@ -32,7 +32,7 @@ typedef struct
 
 static const TEXTURE_DRIFTING_EFFECT Texture_Drifting_effect[] =
 {
-	{ "data/texture/1fd332c84e90c5da8ed7defd8616a278.png",			960, 768, 192, 192, 5, 19 }
+	{ "data/texture/turbo.png",			960, 768, 192, 192, 5, 19 }
 };
 
 typedef struct

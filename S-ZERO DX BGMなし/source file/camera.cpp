@@ -135,8 +135,14 @@ void Camera::Update(void)
 				camera_drift_state_left = false;
 			}
 	
+			if (camera_drift_state_righrt && camera_drift_state_left)
+			{
+				camera_drift_state_righrt = false;
+				camera_drift_state_left = false;
+			}
+
 			//視点ドリフト中心右回転
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D) && GetKeyboardPress(DIK_J))
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_D)&& !GetKeyboardPress(DIK_A) && GetKeyboardPress(DIK_J))
 			{
 				camera_drift_state_righrt = true;
 
@@ -146,7 +152,7 @@ void Camera::Update(void)
 			}
 			else
 				//視点中心右回転
-				if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) || GetKeyboardPress(DIK_D))
+				if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC3) || GetKeyboardPress(DIK_D) && !GetKeyboardPress(DIK_A))
 				{
 					if (camera_handle_right < 0.025) {
 						camera_handle_right += 0.001f;
@@ -160,7 +166,7 @@ void Camera::Update(void)
 					m_eye = m_at + dir;
 				}
 			//視点ドリフト中心左回転
-			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_A) && GetKeyboardPress(DIK_J))
+			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) && MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_A) && !GetKeyboardPress(DIK_D) && GetKeyboardPress(DIK_J))
 			{
 				camera_drift_state_left = true;
 				
@@ -169,7 +175,7 @@ void Camera::Update(void)
 			}
 			else
 				//視点中心左回転
-				if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) || GetKeyboardPress(DIK_A))
+				if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_STAIC4) || GetKeyboardPress(DIK_A)&& !GetKeyboardPress(DIK_D))
 				{
 					if (camera_handle_left > -0.025) {
 						camera_handle_left -= 0.001f;
@@ -188,7 +194,7 @@ void Camera::Update(void)
 		{
 			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_J))
 			{
-				camera_handle_left_drift -= 0.001f;
+				camera_handle_left_drift -= 0.0005f;
 				if (camera_handle_left_drift < -0.03f) {
 					camera_handle_left_drift = -0.03f;
 				}
@@ -206,7 +212,7 @@ void Camera::Update(void)
 		{
 			if (MyInputGamepad::GetButtonPress(MYGAMEPAD_BUTTON_RIGHT_SHOULDER) || GetKeyboardPress(DIK_J))
 			{
-				camera_handle_right_drift += 0.001f;
+				camera_handle_right_drift += 0.0005f;
 				if (camera_handle_right_drift > 0.03f) {
 					camera_handle_right_drift = 0.03f;
 				}

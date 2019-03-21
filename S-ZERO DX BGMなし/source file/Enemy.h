@@ -27,9 +27,9 @@ typedef struct
 
 static const TEXTURE_B g_aTexture_b[] = 
 {
-	{ "data/texture/49071031.png" },
-	{ "data/texture/03830a7e38159ea2093564140a50b928.png" },
-	{ "data/texture/200px-ThwompNSMBU.png" }
+	{ "data/texture/kribo.png" },
+	{ "data/texture/green_shell.png" },
+	{ "data/texture/dossun.png" }
 };
 
 class CBillboard {

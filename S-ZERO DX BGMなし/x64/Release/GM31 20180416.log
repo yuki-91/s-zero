@@ -1,0 +1,85 @@
+﻿  billboard.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Bullet.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  camera.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  coin.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  dashboard.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  dashboard_side.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Explosion.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  hit.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  input.cpp
+source file\input.cpp(82): error C2664: 'int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)': 引数 2 を 'const char [36]' から 'LPCWSTR' へ変換できません。
+  source file\input.cpp(82): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+source file\input.cpp(89): error C2664: 'int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)': 引数 2 を 'const char [19]' から 'LPCWSTR' へ変換できません。
+  source file\input.cpp(89): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+source file\input.cpp(96): error C2664: 'int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)': 引数 2 を 'const char [55]' から 'LPCWSTR' へ変換できません。
+  source file\input.cpp(96): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+source file\input.cpp(103): error C2664: 'int MessageBoxW(HWND,LPCWSTR,LPCWSTR,UINT)': 引数 2 を 'const char [47]' から 'LPCWSTR' へ変換できません。
+  source file\input.cpp(103): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+  item_box.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  light.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  light2.cpp
+  main.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  manager.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  mesh.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\mesh.h(5): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  meshfield.cpp
+  mode.cpp
+  mode_game.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  mode_operation.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  mode_result.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コンパイル中...
+  mode_title.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  number.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  player.cpp
+source file\player.cpp(7): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Plygon2.cpp
+source file\Plygon2.cpp(7): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Polygon.cpp
+source file\Polygon.cpp(2): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  ranking.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  renderer.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  road.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  road_curve.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  road_side.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scene.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scene2D.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scene3D.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  score.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  sky_wall.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  sound.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  tree_bill.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  wall.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  xmodel.cpp
+source file\xmodel.cpp(7): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  x_model.cpp
+c:\users\sayae\onedrive\ドキュメント\gm31\kadai_08\gm31 20180420\source file\main.h(11): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory

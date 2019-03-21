@@ -33,6 +33,7 @@ void CModeTitle::Init()
 	TitleIn = 0;
 	FadeTitleCount = 0;
 	g_bGoOp = false;
+
 }
 
 void CModeTitle::Uninit()

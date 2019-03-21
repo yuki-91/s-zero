@@ -31,7 +31,7 @@ typedef struct
 
 static const TEXTURE_SMOKE_EXPLOSION Texture_smoke_explosion[] =
 {
-	{ "data/texture/02222047_58ad7a6fc26bb.png",			800, 317, 160, 158.5, 8, 10 }
+	{ "data/texture/smoke.png",			800, 317, 160, 158.5, 8, 10 }
 };
 
 typedef struct

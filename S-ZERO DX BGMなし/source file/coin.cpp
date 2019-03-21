@@ -218,7 +218,7 @@ void CCoin::UpdateCoin()
 
 		}
 	}
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER)) && CModeGame::Getcoin_X() && !CModeGame::Hatena_Button() || GetKeyboardTrigger(DIK_L) && CModeGame::Getcoin_X() && !CModeGame::Hatena_Button())
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER)) && CModeGame::Getcoin_X() || GetKeyboardTrigger(DIK_L) && CModeGame::Getcoin_X() )
 	{
 		PlaySound(SOUND_LABEL_SE_COIN);
 		if (score == 30)

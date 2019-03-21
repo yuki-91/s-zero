@@ -11,10 +11,10 @@ typedef enum
 {
 	SOUND_LABEL_SE_KASOKU= 0,		// 加速
 	SOUND_LABEL_SE_COUNTDOWN,	// カウントダウン
-	SOUND_LABEL_SE_COIN,		// コイン
+	SOUND_LABEL_SE_COIN	,	// コイン
 	SOUND_LABEL_DAMAGE,		// ダメージ
-	SOUND_LABEL_BUTTON,		// ボタン
-	SOUND_LABEL_LASTLAP,		// ラストラップ
+	SOUND_LABEL_BUTTON ,		// ボタン
+	SOUND_LABEL_LASTLAP ,		// ラストラップ
 	SOUND_LABEL_START ,		// スタート
 	SOUND_LABEL_STAR ,		// スター状態
 	SOUND_LABEL_ITEMBOX ,		// アイテムランダム

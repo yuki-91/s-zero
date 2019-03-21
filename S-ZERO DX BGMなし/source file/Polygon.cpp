@@ -15,25 +15,25 @@ static const char* g_aTextureFileName[] = {
 	"data/texture/uturn.png",//逆走ジュゲム
 	"data/texture/SuperStar.png",//スーパースター
 	"data/texture/jugem_last.png",//ラストラップジュゲム
-	"data/texture/cooltext293619826968831.png",//ラップ
-	"data/texture/cooltext293619845881123.png",//ラップ
-	"data/texture/cooltext293619859916715.png",//ラップ
-	"data/texture/cooltext311012637535567.png",//goal
-	"data/texture/cooltext293619627349526.png",//time
-	"data/texture/cooltext293619543903220.png",//3
-	"data/texture/cooltext293619550718538.png",//2
-	"data/texture/cooltext293619558572596.png",//1
-	"data/texture/cooltext293619307154198.png",//go
-	"data/texture/coin_MK8DX.png",//coin13
-	"data/texture/1271_star_l.jpg",//ブルースター
-	"data/texture/509451.png",//丸
+	"data/texture/lap_1_3.png",//ラップ
+	"data/texture/lap_2_3.png",//ラップ
+	"data/texture/lap_3_3.png",//ラップ
+	"data/texture/finish.png",//finish
+	"data/texture/time.png",//time
+	"data/texture/3.png",//3
+	"data/texture/2.png",//2
+	"data/texture/1.png",//1
+	"data/texture/go_.png",//go
+	"data/texture/coin.png",//coin13
+	"data/texture/blue_star.jpg",//ブルースターdelete
+	"data/texture/Circle.png",//丸
 	"data/texture/hatena07_01.png",//はてな
-	"data/texture/slide4-pic1.png",//きのこ
-	"data/texture/0654d0d5829e3393b326fa4711695434-300x300.png",//sec
-	"data/texture/cooltext296471575948172.png",//pressstartt
-	"data/texture/DSC00785.png",//水
-	"data/texture/cooltext297129402880300.png",//title
-	"data/texture/cooltext297129458951208.png",//22
+	"data/texture/kinoko.png",//きのこ
+	"data/texture/shousuuten.png",//sec
+	"data/texture/press_start.png",//pressstartt
+	"data/texture/water_zone.png",//水
+	"data/texture/S-ZERO.png",//title
+	"data/texture/DX.png",//22
 	"data/texture/rule.png",//sousa
 	"data/texture/go.png",//24ジュゲム
 	"data/texture/go1.png",//25
@@ -45,7 +45,7 @@ static const char* g_aTextureFileName[] = {
 	"data/texture/2dashu_kinoko.png",//ダブルダッシュキノコ
 	"data/texture/guid3.png",//guid32
 	"data/texture/pawaful_dash.png",//パワフルダッシュキノコ
-	"data/texture/03830a7e38159ea2093564140a50b928.png",//緑甲羅34
+	"data/texture/green_shell.png",//緑甲羅34
 };
 
 static const int TEXTURE_FILE_COUNT = ARRAYCOUNT(g_aTextureFileName);

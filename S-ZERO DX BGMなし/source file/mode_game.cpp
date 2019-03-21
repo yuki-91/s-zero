@@ -62,6 +62,7 @@ static CField *m_Field;
 static CScore *m_Score;
 static Camera *m_camera;
 
+//ラップ処理
 float CModeGame::time = 6000;		//ラップタイム１週目
 float CModeGame::time2 = 6000;		//ラップタイム２週目
 float CModeGame::time3 = 6000;		//ラップタイム３週目
@@ -71,10 +72,17 @@ bool CModeGame::TargetPoint3 = false;	//ラップチェックポイント３
 bool CModeGame::TargetPoint4 = false;	//ラップチェックポイント４
 int CModeGame::Lap = 0;					//ラップ数カウント
 
+//タイム処理
 int CModeGame::Dtime;					//タイム管理
 int CModeGame::Dtime2;					//タイム管理
 int CModeGame::Dtime3;					//タイム管理
+int CModeGame::onetime;					//1週目タイム
+int CModeGame::twotime;					//2週目タイム
+int CModeGame::threetime;				//3週目タイム
+int CModeGame::result = 0;				//ランキング画面へ
+bool CModeGame::rap = false;			//ラップ数カウント
 
+//スタートカウントダウン処理
 bool CModeGame::use = false;			//ゲーム開始判別
 int CModeGame::ModelLife;				//カウントダウンカウント
 bool CModeGame::bCount0 = false;		//カウントダウン描画
@@ -84,10 +92,23 @@ bool CModeGame::bCount3 = false;		//カウントダウン描画
 bool CModeGame::startTime = false;		//全ラップタイム管理
 bool CModeGame::dash = false;			//ロケットスタート判別
 
+//ジュゲム処理
+float CModeGame::jugemu;				//ジュゲム位置
+bool CModeGame::jug;					//ジュゲム管理
+float CModeGame::jug2;					//ジュゲム逆走管理
+float CModeGame::jug_last_y;			//ジュゲムラスト告知
+int CModeGame::lastlap = false;			//ジュゲムラスト告知タイム
 
+float CModeGame::x_map;					//ミニマッププレイヤー位置Ｘ
+float CModeGame::z_map;					//ミニマッププレイヤー位置Ｚ
+int CModeGame::OpIn = 0;				//フェードイン
+int CModeGame::FadeOpCount = 0;			//フェードアウト
+
+
+//アイテム処理
+int CModeGame::item_rand = 0;			//アイテムのランダム
+int CModeGame::item_rand2 = 0;			//アイテム２のランダム
 int CModeGame::color;					//はてなの色変更
-int CModeGame::item_count = 0;			//はてなカウント
-int CModeGame::item_count2 = 0;			//はてなカウント２
 int CModeGame::hatena_a = 0;			//はてな表示
 int CModeGame::hatena2_a = 0;			//はてな２表示
 int CModeGame::kinoko_a = 0;			//キノコ表示
@@ -98,7 +119,7 @@ int CModeGame::green__shell_a = 0;		//緑甲羅表示
 int CModeGame::coin_a = 0;				//コイン表示
 int CModeGame::star_a = 0;				//スター表示
 
-
+//アイテム保留
 int CModeGame::kinoko_a_keep = 0;		//キノコ表示２
 int CModeGame::kinoko2_a_keep = 0;		//ダブルキノコ表示２
 int CModeGame::kinoko3_a_keep = 0;		//トリプルキノコ表示２
@@ -107,6 +128,7 @@ int CModeGame::green__shell_a_keep = 0;	//緑甲羅表示２
 int CModeGame::coin_a_keep = 0;			//コイン表示２
 int CModeGame::star_a_keep = 0;			//スター表示２
 
+//アイテム使用
 bool CModeGame::b_kinoko_x = false;		//キノコ使用しているか
 bool CModeGame::b_kinoko1_x = false;	//シングルキノコ使用しているか
 bool CModeGame::b_kinoko2_x = false;	//ダブルキノコ使用しているか
@@ -115,37 +137,21 @@ bool CModeGame::b_pw_kinoko_x = false;	//パワフルキノコ使用しているか
 bool CModeGame::b_green_shell = false;	//緑甲羅使用しているか
 bool CModeGame::b_coin_x = false;		//コイン使用しているか
 bool CModeGame::b_star_x = false;		//スター使用しているか
+bool CModeGame::b_pw = false;			//パワフルダッシュキノコ使用しているか
+int CModeGame::pw_dash_time = 0;		//パワフルダッシュキノコ時間
 
 bool CModeGame::hatenafal = false;		//はてな使用しているか
 bool CModeGame::hatenafal2 = false;		//はてな２使用しているか
+bool CModeGame::hatena_change = false;	//はてな中
+bool CModeGame::hatena_change2 = false;	//はてな2中
+bool CModeGame::item_hatena_use = false; //はてな使用中か
+int CModeGame::item_count = 0;			//はてなカウント
+int CModeGame::item_count2 = 0;			//はてなカウント２
+bool CModeGame::hatena_bgm = false;		//はてなのBGM管理
+bool CModeGame::hatena_bgm2 = false;	//はてな2のBGM管理
 
-int CModeGame::result = 0;				//ランキング画面へ
-bool CModeGame::rap = false;			//ラップ数カウント
-int CModeGame::onetime;
-int CModeGame::twotime;
-int CModeGame::threetime;
-float CModeGame::jugemu;
-bool CModeGame::jug;
-float CModeGame::jug2;
-float CModeGame::jug_last_y ;
-float CModeGame::x_map;
-float CModeGame::z_map;
-int CModeGame::lastlap = false;
-int CModeGame::item_rand = 0;
-int CModeGame::item_rand2 = 0;
-bool CModeGame::hatena_bgm = false;
-bool CModeGame::hatena_bgm2 = false;
-int CModeGame::OpIn = 0;
-int CModeGame::FadeOpCount = 0;
 
-bool CModeGame::hatena_change = false;
-bool CModeGame::hatena_change2 = false;
-bool CModeGame::hatena_button = false;
-bool CModeGame::triple_kinoko_seigyo = false;
-int CModeGame::pw_dash_time = 0;
-bool CModeGame::b_pw = false;
-bool CModeGame::item_hatena_use = false;
-bool CModeGame::hatena_end = false;
+
 
 void CModeGame::Init()
 {
@@ -218,15 +224,12 @@ void CModeGame::Init()
 
 	hatena_bgm = false;
 	hatena_bgm2 = false;
-	hatena_button = false;
 	hatena_change = false;
 	hatena_change2 = false;
 
-	triple_kinoko_seigyo = false;
 	pw_dash_time = 0;
 	b_pw = false;
 	item_hatena_use = false;
-	hatena_end = false;
 }
 
 void CModeGame::Uninit()
@@ -303,11 +306,7 @@ void CModeGame::Update()
 
 	//ミニマップ
 	x_map = CX_model::XmodelPos().x;
-	z_map = -CX_model::XmodelPos().z;
-
-
-	
-		
+	z_map = -CX_model::XmodelPos().z;	
 }
 
 void CModeGame::Draw()
@@ -403,6 +402,7 @@ void CModeGame::Draw()
 	if (bCount0) {
 		CPolygon::PolygonDraw2(12, D3DCOLOR_RGBA(255, 255, 255, 255), 470, 290, 501, 253, 501, 253, 0, 0, 501, 253);
 		CPolygon::PolygonDraw2(24, D3DCOLOR_RGBA(255, 255, 255, 255), 800.0f, 100.0f + jug2, 300.0f, 300.0f, 300, 300, 0, 0, 300, 300);
+
 	}
 	//コイン数
 	CPolygon::PolygonDraw2(13, D3DCOLOR_RGBA(255, 255, 255, 255), 10, 660, 80, 80, 80, 80, 0, 0, 80, 80);
@@ -756,11 +756,10 @@ void CModeGame::Item() {
 	}
 
 	//トリプルダッシュキノコ処理
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && b_kinoko1_x && !b_kinoko2_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && b_kinoko1_x && !b_kinoko2_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy())
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && b_kinoko1_x && !b_kinoko2_x && !CX_model::Getkinoko_count() &&  !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && b_kinoko1_x && !b_kinoko2_x && !CX_model::Getkinoko_count() && !CX_model::Get_posy())
 	{
 		PlaySound(SOUND_LABEL_WAHAAKINO);
 		kinoko_a = 0;
-		triple_kinoko_seigyo = false;
 		b_kinoko3_x = false;
 		b_kinoko1_x = false;
 		b_kinoko2_x = false;
@@ -783,7 +782,6 @@ void CModeGame::Item() {
 			if (!hatenafal2)
 			{
 				item_hatena_use = true;
-				//hatena_button = true;
 				item_count2++;
 				hatena2_a = 255;
 				item_rand2 = rand() % 4 + 1;
@@ -792,43 +790,43 @@ void CModeGame::Item() {
 			}
 		}
 
-
-
 	if (item_count >= 200)
 	{
 		hatena_change2 = false;
 		hatena_change = false;
-		//きのこ
-		if (item_rand == 1) {
+
+		switch (item_rand)
+		{
+		case 1://きのこ
 			kinoko_a = 255;
 			b_kinoko_x = true;
-		}
-		//コイン
-		if (item_rand == 2) {
+			break;
+
+		case 2://コイン
 			coin_a = 255;
 			b_coin_x = true;
-		}
-		//スター
-		if (item_rand == 3) {
+			break;
+
+		case 3://スター
 			star_a = 255;
 			b_star_x = true;
-		}
-		//トリプルダッシュキノコ
-		if (item_rand == 4) {
+			break;
+
+		case 4://トリプルダッシュキノコ
 			kinoko3_a = 255;
 			b_kinoko3_x = true;
 			b_kinoko2_x = false;
 			b_kinoko1_x = false;
-		}
-		//パワフルダッシュキノコ
-		if (item_rand == 5) {
+			break;
+
+		case 5://パワフルダッシュキノコ
 			p_kinoko_a = 255;
 			b_pw_kinoko_x = true;
-		}
-		//緑甲羅
-		if (item_rand == 6) {
+			break;
+		case 6://緑甲羅
 			green__shell_a = 255;
 			b_green_shell = true;
+			break;
 		}
 		hatenafal = true;
 	}
@@ -837,8 +835,10 @@ void CModeGame::Item() {
 		b_coin_x = false;
 		b_star_x = false;
 	}
+
+
 	//アイテム使用
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !hatena_button && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !hatena_button && !CX_model::Get_posy())
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false)  && !CX_model::Get_posy())
 	{
 
 
@@ -871,7 +871,7 @@ void CModeGame::Item() {
 
 
 
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko3_x &&b_kinoko2_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko3_x && b_kinoko2_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy())
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko3_x &&b_kinoko2_x && !CX_model::Getkinoko_count()  && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko3_x && b_kinoko2_x && !CX_model::Getkinoko_count() && !CX_model::Get_posy())
 	{
 
 		PlaySound(SOUND_LABEL_WAHAAKINO);
@@ -882,7 +882,7 @@ void CModeGame::Item() {
 		b_kinoko3_x = false;
 	}
 
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko2_x && b_kinoko3_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko2_x&& b_kinoko3_x && !CX_model::Getkinoko_count() && !hatena_button && !CX_model::Get_posy())
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !b_kinoko2_x && b_kinoko3_x && !CX_model::Getkinoko_count()  && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !b_kinoko2_x&& b_kinoko3_x && !CX_model::Getkinoko_count()  && !CX_model::Get_posy())
 	{
 		PlaySound(SOUND_LABEL_WAHAAKINO);
 		kinoko2_a = 255;
@@ -910,44 +910,40 @@ void CModeGame::Item() {
 		item_hatena_use = false;
 		hatena_change2 = false;
 		hatena_change = false;
-		hatena_button = false;
-		//hatena2_a = 0;
-		//きのこ
-		if (item_rand2 == 1) {
+
+		switch (item_rand2)
+		{
+		case 1://きのこ
 			kinoko_a_keep = 255;
-		}
-		//コイン
-		if (item_rand2 == 2) {
+			break;
+
+		case 2://コイン
 			coin_a_keep = 255;
-		}
-		//スター
-		if (item_rand2 == 3) {
+			break;
+
+		case 3://スター
 			star_a_keep = 255;
-		}
-		//トリプルダッシュキノコ
-		if (item_rand2 == 4) {
+			break;
+
+		case 4://トリプルダッシュキノコ
 			kinoko3_a_keep = 255;
-		}
-		//パワフルダッシュキノコ
-		if (item_rand2 == 5) {
+			break;
+
+		case 5://パワフルダッシュキノコ
 			p_kinoko_a_keep = 255;
-		}
-		//緑甲羅
-		if (item_rand2 == 6) {
+			break;
+		case 6://緑甲羅
 			green__shell_a_keep = 255;
+			break;
 		}
 		hatenafal2 = true;
 	}
-	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false) && !hatena_button && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !hatena_button && !CX_model::Get_posy())
+
+	if ((MyInputGamepad::GetButtonTrigger(MYGAMEPAD_BUTTON_LEFT_SHOULDER) && CX_model::kinohit() == false)  && !CX_model::Get_posy() || (GetKeyboardTrigger(DIK_L) && CX_model::kinohit() == false) && !CX_model::Get_posy())
 	{
 		//item_count = 200;
 		if (!b_kinoko3_x && !b_kinoko2_x && !b_kinoko1_x)
 		{
-
-			if (b_kinoko1_x || b_kinoko2_x || b_kinoko3_x)
-			{
-				triple_kinoko_seigyo = true;
-			}
 
 			if (!b_pw_kinoko_x)
 			{
@@ -992,7 +988,6 @@ void CModeGame::Item() {
 					p_kinoko_a_keep = 0;
 				}
 				hatenafal2 = true;
-				triple_kinoko_seigyo = false;
 			}
 
 			hatenafal2 = false;
@@ -1047,7 +1042,6 @@ void CModeGame::Item() {
 			p_kinoko_a_keep = 0;
 		}
 		b_pw = false;
-		triple_kinoko_seigyo = false;
 	}
 }
 
@@ -1148,19 +1142,4 @@ bool  CModeGame::Hatena_Change()
 bool  CModeGame::Hatena_Change2()
 {
 	return hatena_change2;
-}
-
-bool  CModeGame::Hatena_Button()
-{
-	return hatena_button;
-}
-
-bool  CModeGame::Hatena_end()
-{
-	return hatena_end;
-}
-
-bool  CModeGame::Get_Triple_seigyo()
-{
-	return triple_kinoko_seigyo;
 }

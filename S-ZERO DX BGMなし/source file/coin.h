@@ -26,7 +26,7 @@ typedef struct
 
 static const TEXTURE_COIN g_aTexture_co[] =
 {
-	{ "data/texture/coin_MK8DX.png" }
+	{ "data/texture/coin.png" }
 };
 
 

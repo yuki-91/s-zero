@@ -37,7 +37,7 @@ SOUNDPARAM g_aParam[SOUND_LABEL_MAX] =
 	{"data/sound/countdown.wav", 0},		// カウントダウン
 	{"data/sound/coin03.wav", 0},		// コイン
 	{"data/sound/damage1.wav", 0},			// ダメージ
-	{ "data/sound/se_maoudamashii_system49.wav", 0 },			// ボタン
+	{ "data/sound/button.wav", 0 },			// ボタン
 	{ "data/sound/lastlap.wav", 0 },			//ラストラップ
 	{ "data/sound/start.wav", 0 },			// スタート
 	{ "data/sound/star.wav", 0 },			// スター状態

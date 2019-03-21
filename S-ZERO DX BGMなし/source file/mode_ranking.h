@@ -24,9 +24,9 @@ typedef struct
 
 static const TEXTURE_RANK g_aTexture_Rank[] =
 {
-	{ "data/texture/101-free-backgrounds.png" },
-	{ "data/texture/cooltext295369380904551.png" },
-	{ "data/texture/cooltext295368786956548.png" },
+	{ "data/texture/result.png" },
+	{ "data/texture/new_record.png" },
+	{ "data/texture/not_ranked.png" },
 };
 
 class CModeRanking :public CMode

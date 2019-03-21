@@ -32,7 +32,7 @@ typedef struct
 
 static const TEXTURE_START_EXPLOSION Texture_Start_effect[] =
 {
-	{ "data/texture/êÖ1.png",			960, 768, 192, 192, 5, 19 }
+	{ "data/texture/water_state.png",			960, 768, 192, 192, 5, 19 }
 };
 
 typedef struct
