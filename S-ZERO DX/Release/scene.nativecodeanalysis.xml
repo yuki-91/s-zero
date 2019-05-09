@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>scene.cpp</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>6282</DEFECTCODE>
+    <DESCRIPTION>不適切な演算子です: ブール値のコンテキストの定数の代入式です。代わりに、'==' を使用してください。</DESCRIPTION>
+    <FUNCTION>CScene::Release</FUNCTION>
+    <DECORATED>?Release@CScene@@QAEXXZ</DECORATED>
+    <FUNCLINE>26</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

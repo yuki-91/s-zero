@@ -1,0 +1,28 @@
+﻿  3d_stagegimic.cpp
+  itembox_effect.cpp
+  mode_game.cpp
+source file\mode_game.cpp(448): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(452): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(455): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(458): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(461): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(464): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(467): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+source file\mode_game.cpp(470): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  mode_operation.cpp
+source file\mode_operation.cpp(56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  mode_rule.cpp
+source file\mode_rule.cpp(54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  mode_title.cpp
+source file\mode_title.cpp(83): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  myInput.cpp
+  mode_ranking.cpp
+source file\mode_ranking.cpp(257): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  renderer.cpp
+  コード生成しています。
+  1241 of 1245 functions (99.7%) were compiled, the rest were copied from previous compilation.
+    151 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  GM31 20180416.vcxproj -> C:\Users\sayae\OneDrive\ドキュメント\応募\s-zer\GM31 20180420\Release\GM31 20180416.exe
+  GM31 20180416.vcxproj -> C:\Users\sayae\OneDrive\ドキュメント\応募\s-zer\GM31 20180420\Release\GM31 20180416.pdb (Full PDB)

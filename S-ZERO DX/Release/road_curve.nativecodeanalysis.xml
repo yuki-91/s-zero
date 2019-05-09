@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>road_curve.cpp</FILENAME>
+      <LINE>101</LINE>
+      <COLUMN>56</COLUMN>
+    </SFA>
+    <DEFECTCODE>6200</DEFECTCODE>
+    <DESCRIPTION>インデックス '21' は、有効なインデックスの範囲 '0' から '3' (スタックでないバッファー 'struct TEXTURE_CURVE const * const g_aTexture_c') を超えています。</DESCRIPTION>
+    <FUNCTION>CRoadCurveD::Init</FUNCTION>
+    <DECORATED>?Init@CRoadCurveD@@UAEXXZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

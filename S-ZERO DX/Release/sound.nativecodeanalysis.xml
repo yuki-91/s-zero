@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>sound.cpp</FILENAME>
+      <LINE>61</LINE>
+      <COLUMN>15</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>戻り値が無視されました: 'CoInitializeEx'</DESCRIPTION>
+    <FUNCTION>InitSound</FUNCTION>
+    <DECORATED>?InitSound@@YAJPAUHWND__@@@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

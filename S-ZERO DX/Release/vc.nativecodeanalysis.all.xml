@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>c:\program files (x86)\microsoft directx sdk (june 2010)\include\</FILEPATH>
+      <FILENAME>dinput.h</FILENAME>
+      <LINE>4321</LINE>
+      <COLUMN>25</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>'joyConfigChanged' に対する整合性のない注釈: このインスタンスには 注釈なし が含まれます。c:\program files (x86)\windows kits\8.1\include\um\joystickapi.h(444) を参照してください。</DESCRIPTION>
+    <FUNCTION>joyConfigChanged</FUNCTION>
+    <DECORATED>joyConfigChanged@4</DECORATED>
+    <FUNCLINE>4321</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>23</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>'WinMain' に対する整合性のない注釈: このインスタンスには 注釈なし が含まれます。c:\program files (x86)\windows kits\8.1\include\um\winbase.h(905) を参照してください。</DESCRIPTION>
+    <FUNCTION>WinMain</FUNCTION>
+    <DECORATED>WinMain@16</DECORATED>
+    <FUNCLINE>23</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>mesh.cpp</FILENAME>
+      <LINE>116</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>'m_pIndex' への書き込み中にバッファー オーバーランが発生しました: 書き込み可能なサイズは 'private: static int CField::m_nIndexNum*2' バイトですが、'4' バイトを書き込む可能性があります。</DESCRIPTION>
+    <FUNCTION>CField::CreateMeshfield</FUNCTION>
+    <DECORATED>?CreateMeshfield@CField@@QAEXMH@Z</DECORATED>
+    <FUNCLINE>59</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>62</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>63</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>64</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>66</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>67</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>71</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>84</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>84</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>89</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>89</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>115</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>116</LINE>
+        <COLUMN>13</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>使用法</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'m_pIndex[1]' への書き込みは無効です (書き込み可能な範囲は 0 から 0 まで)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>road_curve.cpp</FILENAME>
+      <LINE>101</LINE>
+      <COLUMN>56</COLUMN>
+    </SFA>
+    <DEFECTCODE>6200</DEFECTCODE>
+    <DESCRIPTION>インデックス '21' は、有効なインデックスの範囲 '0' から '3' (スタックでないバッファー 'struct TEXTURE_CURVE const * const g_aTexture_c') を超えています。</DESCRIPTION>
+    <FUNCTION>CRoadCurveD::Init</FUNCTION>
+    <DECORATED>?Init@CRoadCurveD@@UAEXXZ</DECORATED>
+    <FUNCLINE>42</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>scene.cpp</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>6282</DEFECTCODE>
+    <DESCRIPTION>不適切な演算子です: ブール値のコンテキストの定数の代入式です。代わりに、'==' を使用してください。</DESCRIPTION>
+    <FUNCTION>CScene::Release</FUNCTION>
+    <DECORATED>?Release@CScene@@QAEXXZ</DECORATED>
+    <FUNCLINE>26</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>sound.cpp</FILENAME>
+      <LINE>61</LINE>
+      <COLUMN>15</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>戻り値が無視されました: 'CoInitializeEx'</DESCRIPTION>
+    <FUNCTION>InitSound</FUNCTION>
+    <DECORATED>?InitSound@@YAJPAUHWND__@@@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>sky_box.cpp</FILENAME>
+      <LINE>81</LINE>
+      <COLUMN>46</COLUMN>
+    </SFA>
+    <DEFECTCODE>6285</DEFECTCODE>
+    <DESCRIPTION>(&lt;0 でない定数&gt; || &lt;0 でない定数&gt;) は常に 0 でない定数です。ビットごとの and 演算子を使用しようとしましたか?</DESCRIPTION>
+    <FUNCTION>CXmodel::InitXmodel</FUNCTION>
+    <DECORATED>?InitXmodel@CXmodel@@QAE_NXZ</DECORATED>
+    <FUNCLINE>59</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

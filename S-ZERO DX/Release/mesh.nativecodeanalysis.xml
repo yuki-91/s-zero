@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+      <FILENAME>mesh.cpp</FILENAME>
+      <LINE>116</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>'m_pIndex' への書き込み中にバッファー オーバーランが発生しました: 書き込み可能なサイズは 'private: static int CField::m_nIndexNum*2' バイトですが、'4' バイトを書き込む可能性があります。</DESCRIPTION>
+    <FUNCTION>CField::CreateMeshfield</FUNCTION>
+    <DECORATED>?CreateMeshfield@CField@@QAEXMH@Z</DECORATED>
+    <FUNCLINE>59</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>62</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>63</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>64</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>66</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>67</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>69</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>70</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>71</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>72</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>84</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>84</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>89</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>89</LINE>
+        <COLUMN>20</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>115</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\sayae\onedrive\ドキュメント\gm31\1228\gm31 20180420\source file\</FILEPATH>
+        <FILENAME>mesh.cpp</FILENAME>
+        <LINE>116</LINE>
+        <COLUMN>13</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>使用法</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'m_pIndex[1]' への書き込みは無効です (書き込み可能な範囲は 0 から 0 まで)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>
